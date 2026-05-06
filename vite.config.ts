@@ -19,7 +19,7 @@ export default defineConfig({
         display: 'standalone',
         orientation: 'portrait',
         start_url: './',
-        scope: '/MT6/',
+        scope: '/TM6/',
         icons: [
           {
             src: '/icon-192.png',
@@ -57,5 +57,5 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 6000,
   },
-  base: '/MT6/',
+  base: '/TM6/',
 })
