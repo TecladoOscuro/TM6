@@ -53,7 +53,7 @@ export default function SearchPage() {
               <SlidersHorizontal size={18} />
             </Button>
           </SheetTrigger>
-          <SheetContent side="bottom" className="h-[85vh] rounded-t-2xl overflow-y-auto">
+          <SheetContent side="bottom" className="h-[85vh] rounded-t-2xl overflow-y-auto px-6">
             <SheetHeader>
               <SheetTitle>Filtros</SheetTitle>
             </SheetHeader>

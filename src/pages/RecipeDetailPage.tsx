@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Clock, ChefHat, Users, Heart, Bookmark, ShoppingCart, Play, Thermometer, Gauge, Timer, Info } from 'lucide-react'
 import { useRecipeStore } from '@/stores/recipeStore'
+import { useToastStore } from '@/stores/toastStore'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
@@ -18,6 +19,7 @@ export default function RecipeDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { getRecipe, toggleFavorite, toggleMakeLater, addToShoppingList, recipes, init } = useRecipeStore()
+  const showToast = useToastStore(s => s.show)
 
   useEffect(() => { if (recipes.length === 0) init() }, [])
 
@@ -81,7 +83,7 @@ export default function RecipeDetailPage() {
         )}
 
         <div className="flex gap-2 mb-6">
-          <Button variant="outline" className="flex-1" onClick={() => addToShoppingList(recipe.id)}>
+          <Button variant="outline" className="flex-1" onClick={() => { addToShoppingList(recipe.id); showToast('Añadido a la compra') }}>
             <ShoppingCart size={18} className="mr-2" /> Añadir a la compra
           </Button>
           <Button className="flex-1" onClick={() => navigate(`/cook/${recipe.id}`)}>
