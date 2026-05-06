@@ -28,7 +28,7 @@ export default function HomePage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-2xl font-bold text-[var(--color-text)]">MT6 Recetas</h1>
+          <h1 className="text-2xl font-bold text-[var(--color-text)]">TM6 Recetas</h1>
           <p className="text-sm text-[var(--color-text-secondary)]">{recipes.length.toLocaleString('es')} recetas</p>
         </div>
         <Sparkles size={22} className="text-[var(--color-accent)]" />

@@ -11,15 +11,15 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'MT6 Recetas',
-        short_name: 'MT6',
-        description: 'Recetas para Thermomix MT6',
+        name: 'TM6 Recetas',
+        short_name: 'TM6',
+        description: 'Recetas para Thermomix TM6',
         theme_color: '#18181b',
         background_color: '#18181b',
         display: 'standalone',
         orientation: 'portrait',
         start_url: './',
-        scope: '/MT6/',
+        scope: '/TM6/',
         icons: [
           {
             src: '/icon-192.png',
@@ -57,5 +57,5 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 6000,
   },
-  base: '/MT6/',
+  base: '/TM6/',
 })

@@ -66,7 +66,7 @@ export default function CookingModePage() {
           clearInterval(timerRef.current!)
           setIsRunning(false)
           if ('Notification' in window && Notification.permission === 'granted') {
-            new Notification('MT6 Recetas', { body: `Paso ${step.stepNumber} completado` })
+            new Notification('TM6 Recetas', { body: `Paso ${step.stepNumber} completado` })
           }
           return 0
         }

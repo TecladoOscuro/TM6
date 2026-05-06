@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Plus, Trash2, GripVertical, CheckCircle } from 'lucide-react'
 import { useRecipeStore } from '../stores/recipeStore'
-import type { Recipe, Ingredient, MT6Step, Category, Difficulty } from '../types/recipe'
+import type { Recipe, Ingredient, TM6Step, Category, Difficulty } from '../types/recipe'
 import { CATEGORY_LABELS, DIFFICULTY_LABELS } from '../types/recipe'
 
 type WizardStep = 'info' | 'ingredients' | 'steps' | 'review'
@@ -24,7 +24,7 @@ export default function AddRecipePage() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([
     { name: '', quantity: null, unit: 'g' }
   ])
-  const [steps, setSteps] = useState<MT6Step[]>([
+  const [steps, setSteps] = useState<TM6Step[]>([
     { stepNumber: 1, instruction: '', temperature: undefined, speed: undefined, time: 5 }
   ])
 
@@ -50,7 +50,7 @@ export default function AddRecipePage() {
     setSteps([...steps, { stepNumber: steps.length + 1, instruction: '', temperature: undefined, speed: undefined, time: 5 }])
   }
 
-  const updateStep = (index: number, field: Partial<MT6Step>) => {
+  const updateStep = (index: number, field: Partial<TM6Step>) => {
     const updated = [...steps]
     updated[index] = { ...updated[index], ...field }
     setSteps(updated)
@@ -67,7 +67,7 @@ export default function AddRecipePage() {
     const recipe: Recipe = {
       id: title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') + '-' + Date.now(),
       title,
-      description: description || `${title} - receta casera para Thermomix MT6.`,
+      description: description || `${title} - receta casera para Thermomix TM6.`,
       category,
       difficulty,
       totalTime,

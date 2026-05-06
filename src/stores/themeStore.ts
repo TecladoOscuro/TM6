@@ -23,7 +23,7 @@ function applyTheme(resolved: 'light' | 'dark') {
   document.documentElement.style.colorScheme = resolved
 }
 
-const stored = (typeof localStorage !== 'undefined' ? localStorage.getItem('mt6-theme') : null) as Theme | null
+const stored = (typeof localStorage !== 'undefined' ? localStorage.getItem('tm6-theme') : null) as Theme | null
 const initial: Theme = stored || 'system'
 const initialResolved = resolveTheme(initial)
 if (typeof document !== 'undefined') applyTheme(initialResolved)
@@ -33,7 +33,7 @@ export const useThemeStore = create<ThemeStore>((set) => ({
   resolved: initialResolved,
   setTheme: (mode) => {
     const resolved = resolveTheme(mode)
-    localStorage.setItem('mt6-theme', mode)
+    localStorage.setItem('tm6-theme', mode)
     applyTheme(resolved)
     set({ mode, resolved })
   },

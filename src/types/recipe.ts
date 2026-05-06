@@ -38,7 +38,7 @@ export type DietTag =
   | 'economica'
   | 'sin_soja'
 
-export type MT6Accessory = 'mariposa' | 'cestillo' | 'varoma' | 'paleta' | 'espatula'
+export type TM6Accessory = 'mariposa' | 'cestillo' | 'varoma' | 'paleta' | 'espatula'
 
 export interface Ingredient {
   name: string
@@ -49,14 +49,14 @@ export interface Ingredient {
   prep?: string
 }
 
-export interface MT6Step {
+export interface TM6Step {
   stepNumber: number
   instruction: string
   temperature?: number | 'varoma'
   speed?: number | 'cuchara' | 'espiga' | 'velocidad cuchara'
   time: number
   reverse?: boolean
-  accessory?: MT6Accessory
+  accessory?: TM6Accessory
   note?: string
 }
 
@@ -82,10 +82,10 @@ export interface Recipe {
   image?: string
 
   ingredients: Ingredient[]
-  steps: MT6Step[]
+  steps: TM6Step[]
 
   tags: DietTag[]
-  utensils: MT6Accessory[]
+  utensils: TM6Accessory[]
   nutrition?: Nutrition
 
   // IndexedDB fields (not in JSON seed)
@@ -118,7 +118,7 @@ export interface FilterState {
   includeIngredients: string[]
   excludeIngredients: string[]
   tags: DietTag[]
-  utensils: MT6Accessory[]
+  utensils: TM6Accessory[]
   sortBy: 'relevance' | 'time_asc' | 'time_desc' | 'difficulty_asc' | 'difficulty_desc' | 'title_asc'
 }
 
@@ -191,7 +191,7 @@ export const DIET_TAG_LABELS: Record<DietTag, string> = {
   sin_soja: 'Sin soja',
 }
 
-export const ACCESSORY_LABELS: Record<MT6Accessory, string> = {
+export const ACCESSORY_LABELS: Record<TM6Accessory, string> = {
   mariposa: 'Mariposa',
   cestillo: 'Cestillo',
   varoma: 'Varoma',

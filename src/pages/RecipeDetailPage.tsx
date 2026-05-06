@@ -163,7 +163,7 @@ export default function RecipeDetailPage() {
                 <div className="flex-1">
                   <p className="text-sm text-[var(--color-text)] leading-relaxed">{step.instruction}</p>
 
-                  {/* MT6 settings */}
+                  {/* TM6 settings */}
                   <div className="flex flex-wrap gap-2 mt-1.5">
                     {step.temperature !== undefined && (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-[var(--color-danger)]/10 rounded-lg text-[11px] font-medium text-[var(--color-danger)]">

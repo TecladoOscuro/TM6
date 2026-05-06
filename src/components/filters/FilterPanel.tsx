@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Filter, X } from 'lucide-react'
-import type { FilterState, Category, Difficulty, DietTag, MT6Accessory } from '../../types/recipe'
+import type { FilterState, Category, Difficulty, DietTag, TM6Accessory } from '../../types/recipe'
 import { CATEGORY_LABELS, DIFFICULTY_LABELS, DIET_TAG_LABELS, ACCESSORY_LABELS } from '../../types/recipe'
 
 interface FilterPanelProps {
@@ -215,7 +215,7 @@ export default function FilterPanel({ filter, onChange, onReset }: FilterPanelPr
               <div>
                 <label className="text-xs font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-2 block">Utensilios TM6</label>
                 <div className="flex flex-wrap gap-1.5">
-                  {(Object.entries(ACCESSORY_LABELS) as [MT6Accessory, string][]).map(([k, v]) => (
+                  {(Object.entries(ACCESSORY_LABELS) as [TM6Accessory, string][]).map(([k, v]) => (
                     <button
                       key={k}
                       onClick={() => onChange({ utensils: filter.utensils.includes(k) ? filter.utensils.filter(u => u !== k) : [...filter.utensils, k] })}

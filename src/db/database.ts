@@ -1,14 +1,14 @@
 import Dexie, { type Table } from 'dexie'
 import type { Recipe, ShoppingItem } from '../types/recipe'
 
-class MT6Database extends Dexie {
+class TM6Database extends Dexie {
   recipes!: Table<Recipe, string>
   shoppingList!: Table<ShoppingItem, string>
   favorites!: Table<{ recipeId: string; addedAt: number }, string>
   makeLater!: Table<{ recipeId: string; addedAt: number }, string>
 
   constructor() {
-    super('MT6Recipes')
+    super('TM6Recipes')
     this.version(1).stores({
       recipes: 'id, category, difficulty, totalTime, *tags, source, isFavorite, isMakeLater',
       shoppingList: 'id, recipeId, checked, name',
@@ -32,4 +32,4 @@ class MT6Database extends Dexie {
   }
 }
 
-export const db = new MT6Database()
+export const db = new TM6Database()
