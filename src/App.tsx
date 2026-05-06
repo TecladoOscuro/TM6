@@ -28,7 +28,7 @@ export default function App() {
   }, [])
 
   return (
-    <BrowserRouter basename="/TM6">
+    <BrowserRouter basename="/MT6">
       <Routes>
         <Route element={<Shell />}>
           <Route path="/" element={<HomePage />} />
