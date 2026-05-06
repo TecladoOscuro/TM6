@@ -107,6 +107,7 @@ export interface ShoppingItem {
   unit: string
   checked: boolean
   recipeId?: string
+  recipeTitle?: string
   category?: string
 }
 

@@ -194,6 +194,7 @@ export const useRecipeStore = create<RecipeStore>((set, get) => ({
           unit: ing.unit,
           checked: false,
           recipeId,
+          recipeTitle: recipe.title,
         })
       }
     }

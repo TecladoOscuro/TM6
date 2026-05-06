@@ -10,8 +10,9 @@ interface ShoppingStore {
   addItem: (item: ShoppingItem) => Promise<void>
   toggleItem: (id: string) => Promise<void>
   removeItem: (id: string) => Promise<void>
+  removeRecipeItems: (recipeId: string) => Promise<void>
   clearChecked: () => Promise<void>
-  addRecipeIngredients: (recipeId: string, ingredients: { name: string; quantity: number | null; unit: string }[]) => Promise<void>
+  addRecipeIngredients: (recipeId: string, recipeTitle: string, ingredients: { name: string; quantity: number | null; unit: string }[]) => Promise<void>
 }
 
 export const useShoppingStore = create<ShoppingStore>((set, get) => ({
@@ -44,6 +45,13 @@ export const useShoppingStore = create<ShoppingStore>((set, get) => ({
     set({ items })
   },
 
+  removeRecipeItems: async (recipeId) => {
+    const toDelete = get().items.filter(i => i.recipeId === recipeId)
+    await db.shoppingList.bulkDelete(toDelete.map(i => i.id))
+    const items = await db.shoppingList.toArray()
+    set({ items })
+  },
+
   clearChecked: async () => {
     const checked = get().items.filter(i => i.checked)
     await db.shoppingList.bulkDelete(checked.map(i => i.id))
@@ -51,10 +59,10 @@ export const useShoppingStore = create<ShoppingStore>((set, get) => ({
     set({ items })
   },
 
-  addRecipeIngredients: async (recipeId, ingredients) => {
+  addRecipeIngredients: async (recipeId, recipeTitle, ingredients) => {
     const existing = get().items
     for (const ing of ingredients) {
-      const exists = existing.find(i => i.name.toLowerCase() === ing.name.toLowerCase() && !i.checked)
+      const exists = existing.find(i => i.name.toLowerCase() === ing.name.toLowerCase() && i.recipeId === recipeId && !i.checked)
       if (!exists) {
         await db.shoppingList.put({
           id: crypto.randomUUID(),
@@ -63,6 +71,7 @@ export const useShoppingStore = create<ShoppingStore>((set, get) => ({
           unit: ing.unit,
           checked: false,
           recipeId,
+          recipeTitle,
         })
       }
     }

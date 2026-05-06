@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Clock, ChefHat, Users, Heart, Bookmark, ShoppingCart, Play, Thermometer, Gauge, Timer, Info } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowLeft, Clock, ChefHat, Users, Heart, Bookmark, ShoppingCart, Play, Thermometer, Gauge, Timer, Info, CheckCircle } from 'lucide-react'
 import { useRecipeStore } from '@/stores/recipeStore'
 import { useToastStore } from '@/stores/toastStore'
 import { Button } from '@/components/ui/button'
@@ -20,6 +21,7 @@ export default function RecipeDetailPage() {
   const navigate = useNavigate()
   const { getRecipe, toggleFavorite, toggleMakeLater, addToShoppingList, recipes, init } = useRecipeStore()
   const showToast = useToastStore(s => s.show)
+  const [cartFeedback, setCartFeedback] = useState(false)
 
   useEffect(() => { if (recipes.length === 0) init() }, [])
 
@@ -83,8 +85,35 @@ export default function RecipeDetailPage() {
         )}
 
         <div className="flex gap-2 mb-6">
-          <Button variant="outline" className="flex-1" onClick={() => { addToShoppingList(recipe.id); showToast('Añadido a la compra') }}>
-            <ShoppingCart size={18} className="mr-2" /> Añadir a la compra
+          <Button
+            variant={cartFeedback ? 'default' : 'outline'}
+            className="flex-1 relative overflow-hidden"
+            onClick={() => {
+              if (cartFeedback) return
+              setCartFeedback(true)
+              addToShoppingList(recipe.id)
+              showToast('Añadido a la compra')
+              setTimeout(() => setCartFeedback(false), 1500)
+            }}
+          >
+            <motion.div
+              className="flex items-center gap-2"
+              animate={cartFeedback ? { scale: [1, 1.15, 1] } : {}}
+              transition={{ duration: 0.3 }}
+            >
+              {cartFeedback ? (
+                <motion.span
+                  initial={{ scale: 0, rotate: -90 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <CheckCircle size={18} />
+                </motion.span>
+              ) : (
+                <ShoppingCart size={18} />
+              )}
+              {cartFeedback ? 'Añadido' : 'Añadir a la compra'}
+            </motion.div>
           </Button>
           <Button className="flex-1" onClick={() => navigate(`/cook/${recipe.id}`)}>
             <Play size={18} className="mr-2" /> Cocinar
